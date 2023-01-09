@@ -1,0 +1,127 @@
+openapi: 3.0.1
+info:
+  title: Serverless Demo
+  contact:
+    name: Thorsten Höger
+    email: info@taimos.de
+  license:
+    name: free to use
+  version: "1.0"
+tags:
+- name: info
+- name: admin
+paths:
+  '/todos':
+    get:
+      tags:
+      - admin
+      summary: return list of todos
+      operationId: getTodos
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+            text/calendar:
+              schema:
+                type: string
+    post:
+      tags:
+      - admin
+      summary: add new todo
+      operationId: addTodo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddTodo"
+      responses:
+        201:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        401:
+          description: you are not logged in
+          content: {}
+        403:
+          description: you are not authorized to add todos
+          content: {}
+      x-codegen-request-body-name: body
+  '/todos/{id}':
+    get:
+      tags:
+      - admin
+      summary: get a todo by its id
+      operationId: getTodoById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+    delete:
+      tags:
+      - admin
+      summary: delete a todo
+      operationId: removeTodo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content: {}
+        401:
+          description: you are not logged in
+          content: {}
+        403:
+          description: you are not authorized to remove todos
+          content: {}
+components:
+  schemas:
+    Todo:
+      type: object
+      required:
+        - id
+        - state
+        - title
+        - description
+        - lastUpdate
+      properties:
+        id: 
+          type: string
+        state: 
+          type: string
+        title: 
+          type: string
+        description: 
+          type: string
+        lastUpdate:
+          type: string
+          format: date-time
+    AddTodo:
+      type: object
+      required:
+        - title
+        - description
+      properties:
+        title: 
+          type: string
+        description: 
+          type: string

@@ -1,11 +1,16 @@
-import { App, Stack, StackProps } from 'aws-cdk-lib';
+import { App, CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { RestApiOpenapi } from './generated/rest-api.openapi.generated';
 
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
 
-    // define resources here...
+    const api = new RestApiOpenapi(this, 'RestApi', {
+      stageName: 'dev',
+    });
+
+    new CfnOutput(this, 'ApiId', { value: api.api.restApiId });
   }
 }
 

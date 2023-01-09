@@ -1,12 +1,29 @@
 const { awscdk } = require('projen');
 const project = new awscdk.AwsCdkTypeScriptApp({
-  cdkVersion: '2.1.0',
+  cdkVersion: '2.59.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-serverless-v2-demo',
-
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  deps: [
+    'projen',
+    '@taimos/lambda-toolbox',
+    'uuid',
+    'date-fns',
+    'esbuild',
+    'js-yaml',
+    'openapi-typescript',
+  ],
+  devDeps: [
+    '@types/aws-lambda',
+    '@types/uuid',
+    '@types/js-yaml',
+    '@types/lambda-log',
+  ],
 });
+
+const generateTask = project.addTask('generate:api', {
+  exec: 'openapi-typescript definitions/openapi.yaml --output src/generated/rest-model.generated.ts',
+  description: 'Generate Types from the OpenAPI specification',
+});
+project.preCompileTask.prependSpawn(generateTask);
+
 project.synth();
