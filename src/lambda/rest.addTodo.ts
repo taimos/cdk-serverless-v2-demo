@@ -1,5 +1,5 @@
 import { http, errors } from '@taimos/lambda-toolbox';
-import { operations } from '../generated/rest-model.generated';
+import { operations } from '../generated/rest.myapi-model.generated';
 
 export const handler = http.createOpenApiHandlerWithRequestBody<operations['addTodo']>(async (ctx, data) => {
   ctx.logger.info(JSON.stringify(ctx.event));

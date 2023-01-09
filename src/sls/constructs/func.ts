@@ -18,35 +18,8 @@ export interface LambdaTracingOptions {
    * @default lambda.Tracing.DISABLED
    */
   xRayTracing?: lambda.Tracing;
-
-  /**
-   * Activate tracing with Thundra
-   *
-   * @default false
-   */
-  thundraTracing?: boolean;
-
-  /**
-   * name of the Secret that contains the Thundra API Key
-   *
-   * @default Thundra
-   */
-  thundraApiKeySecret?: string;
-
-  /**
-   * name of the Secret that contains the Thundra API Key
-   *
-   * @default ApiKey
-   */
-  thundraApiKeySecretField?: string;
-
-  /**
-   * ARN of the Lambda layer provided by Thundra
-   *
-   * @default latest
-   */
-  thundraLayerArn?: string;
 }
+
 export interface LambdaFunctionProps {
   /**
    * Deployment stage (e.g. dev)
@@ -156,21 +129,12 @@ export class LambdaFunction extends lambdaNodejs.NodejsFunction {
         ...props.assetDomainName && {
           ASSET_DOMAIN_NAME: props.assetDomainName,
         },
-        ...props.lambdaTracing?.thundraTracing && {
-          thundra_agent_lambda_handler: `index.${props.handler ?? 'handler'}`,
-          thundra_apiKey: cdk.SecretValue.secretsManager(props.lambdaTracing.thundraApiKeySecret ?? 'Thundra', { jsonField: props.lambdaTracing.thundraApiKeySecretField ?? 'ApiKey' }).toString(),
-        },
         ...props.additionalEnv,
       },
       handler: props.handler ?? 'handler',
       description: props.description,
       tracing: props.lambdaTracing?.xRayTracing,
     });
-
-    if (props.lambdaTracing?.thundraTracing) {
-      this.addLayers(lambda.LayerVersion.fromLayerVersionArn(this, 'ThundraLayer', this.props.lambdaTracing?.thundraLayerArn ?? `arn:aws:lambda:${cdk.Stack.of(this).region}:269863060030:layer:thundra-lambda-node-layer-minified:87`));
-      (this.node.tryFindChild('Resource') as lambda.CfnFunction).handler = 'thundra_handler.wrapper';
-    }
 
     if (props.table) {
       if (props.tableWrites ?? true) {

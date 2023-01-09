@@ -11,7 +11,7 @@
     "diff": "npx projen diff",
     "eject": "npx projen eject",
     "eslint": "npx projen eslint",
-    "generate:api": "npx projen generate:api",
+    "generate:api:myapi": "npx projen generate:api:myapi",
     "package": "npx projen package",
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",

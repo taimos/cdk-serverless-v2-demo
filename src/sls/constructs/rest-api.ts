@@ -170,9 +170,6 @@ export class RestApi<PATHS, OPS> extends BaseApi {
   public addCustomRestResource(path: string, method: string, operationId: string, description: string, additionalLambdaOptions: LambdaOptions = {}) {
 
     const entryFile = `./src/lambda/rest.${operationId}.ts`;
-    if (!fs.existsSync(entryFile)) {
-      this.createEntryFile(entryFile, method, operationId);
-    }
 
     const lambdaOptions = {
       ...this.props.lambdaOptions && {
@@ -219,38 +216,6 @@ export class RestApi<PATHS, OPS> extends BaseApi {
     this.addCustomRoute(path, method, operationId, hasVersionConfig ? fn.currentVersion : fn);
 
     return fn;
-  }
-
-  private createEntryFile(entryFile: string, method: string, operationId: string) {
-    let factoryCall;
-    let logs;
-    switch (method.toLowerCase()) {
-      case 'post':
-      case 'put':
-      case 'patch':
-        factoryCall = `http.createOpenApiHandlerWithRequestBody<operations['${operationId}']>(async (ctx, data) => {`;
-        logs = 'ctx.logger.info(JSON.stringify(data));';
-        break;
-      case 'options':
-      case 'delete':
-      case 'get':
-      case 'head':
-      default:
-        factoryCall = `http.createOpenApiHandler<operations['${operationId}']>(async (ctx) => {`;
-        logs = '';
-        break;
-    }
-
-    fs.writeFileSync(entryFile, `import { http, errors } from '@taimos/lambda-toolbox';
-import { operations } from '../generated/rest-model.generated';
-
-export const handler = ${factoryCall}
-  ctx.logger.info(JSON.stringify(ctx.event));
-  ${logs}
-  throw new errors.HttpError(500, 'Not yet implemented');
-});`, {
-      encoding: 'utf-8',
-    });
   }
 
   // private tableWriteAccessForMethod(method: string): boolean {

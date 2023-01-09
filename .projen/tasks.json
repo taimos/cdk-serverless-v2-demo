@@ -69,7 +69,13 @@
       "description": "Synthesize project files",
       "steps": [
         {
+          "exec": "rm -rf cdk.out/"
+        },
+        {
           "exec": "node .projenrc.js"
+        },
+        {
+          "spawn": "generate:api:myapi"
         }
       ]
     },
@@ -123,12 +129,12 @@
         }
       ]
     },
-    "generate:api": {
-      "name": "generate:api",
+    "generate:api:myapi": {
+      "name": "generate:api:myapi",
       "description": "Generate Types from the OpenAPI specification",
       "steps": [
         {
-          "exec": "openapi-typescript definitions/openapi.yaml --output src/generated/rest-model.generated.ts"
+          "exec": "openapi-typescript ./definitions/myapi.yaml --output src/generated/rest.myapi-model.generated.ts"
         }
       ]
     },
@@ -151,12 +157,7 @@
     },
     "pre-compile": {
       "name": "pre-compile",
-      "description": "Prepare the project for compilation",
-      "steps": [
-        {
-          "spawn": "generate:api"
-        }
-      ]
+      "description": "Prepare the project for compilation"
     },
     "synth": {
       "name": "synth",
