@@ -12,6 +12,7 @@ import * as yaml from 'js-yaml';
 import { OpenAPI3, OperationObject, PathItemObject } from 'openapi-typescript';
 import { BaseApi, BaseApiProps } from './base-api';
 import { LambdaFunction, LambdaOptions } from './func';
+import { SingleTableDatastore } from './table';
 
 export interface RestApiProps<OPS> extends BaseApiProps {
 
@@ -49,6 +50,8 @@ export interface RestApiProps<OPS> extends BaseApiProps {
    * @default -
    */
   lambdaOptionsByOperation?: { [operationId in keyof OPS]?: LambdaOptions };
+
+  singleTableDatastore?: SingleTableDatastore;
 
   definitionFileName: string;
 }
@@ -169,7 +172,7 @@ export class RestApi<PATHS, OPS> extends BaseApi {
 
   public addCustomRestResource(path: string, method: string, operationId: string, description: string, additionalLambdaOptions: LambdaOptions = {}) {
 
-    const entryFile = `./src/lambda/rest.${operationId}.ts`;
+    const entryFile = `./src/lambda/rest.${this.props.apiName.toLowerCase()}.${operationId}.ts`;
 
     const lambdaOptions = {
       ...this.props.lambdaOptions && {
@@ -191,10 +194,10 @@ export class RestApi<PATHS, OPS> extends BaseApi {
       // ...this.authentication && {
       //   userPool: this.authentication?.userpool,
       // },
-      // ...this.singleTableDatastore && {
-      //   table: this.singleTableDatastore.table,
-      //   tableWrites: this.tableWriteAccessForMethod(method),
-      // },
+      ...this.props.singleTableDatastore && {
+        table: this.props.singleTableDatastore.table,
+        tableWrites: this.tableWriteAccessForMethod(method),
+      },
       // ...this.assetCdn && {
       //   assetDomainName: this.assetCdn.assetDomainName,
       //   assetBucket: this.assetCdn.assetBucket,
@@ -218,19 +221,19 @@ export class RestApi<PATHS, OPS> extends BaseApi {
     return fn;
   }
 
-  // private tableWriteAccessForMethod(method: string): boolean {
-  //   switch (method.toLowerCase()) {
-  //     case 'delete':
-  //     case 'post':
-  //     case 'put':
-  //     case 'patch':
-  //       return true;
-  //     case 'options':
-  //     case 'get':
-  //     case 'head':
-  //     default:
-  //       return false;
-  //   }
-  // }
+  private tableWriteAccessForMethod(method: string): boolean {
+    switch (method.toLowerCase()) {
+      case 'delete':
+      case 'post':
+      case 'put':
+      case 'patch':
+        return true;
+      case 'options':
+      case 'get':
+      case 'head':
+      default:
+        return false;
+    }
+  }
 
 }

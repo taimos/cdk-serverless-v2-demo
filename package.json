@@ -53,6 +53,7 @@
     "aws-cdk-lib": "^2.59.0",
     "constructs": "^10.0.5",
     "date-fns": "^2.29.3",
+    "dynamodb-onetable": "*",
     "esbuild": "^0.16.16",
     "js-yaml": "^4.1.0",
     "openapi-typescript": "^6.1.0",

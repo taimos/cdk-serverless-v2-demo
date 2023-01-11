@@ -114,6 +114,10 @@
       "type": "runtime"
     },
     {
+      "name": "dynamodb-onetable",
+      "type": "runtime"
+    },
+    {
       "name": "esbuild",
       "type": "runtime"
     },

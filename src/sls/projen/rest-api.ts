@@ -33,8 +33,6 @@ export class RestApi extends CoreAspect {
         }
       }
     }
-
-
   }
 
   protected addRestResource(apiSpec: OpenAPI3, path: string, method: string) {
@@ -43,7 +41,7 @@ export class RestApi extends CoreAspect {
     const operationId = operation.operationId!;
     // const description = `${method as string} ${path as string} - ${operation.summary}`;
 
-    const entryFile = `./src/lambda/rest.${operationId}.ts`;
+    const entryFile = `./src/lambda/rest.${this.options.apiName.toLowerCase()}.${operationId}.ts`;
     if (!fs.existsSync(entryFile)) {
       this.createEntryFile(entryFile, method, operationId);
     }

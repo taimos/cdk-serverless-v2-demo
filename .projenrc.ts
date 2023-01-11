@@ -1,5 +1,5 @@
 import { awscdk } from "projen";
-import { RestApi } from "./src/sls/projen";
+import { Datastore, RestApi } from "./src/sls/projen";
 
 const project = new awscdk.AwsCdkTypeScriptApp({
   cdkVersion: '2.59.0',
@@ -21,5 +21,10 @@ new RestApi(project, {
   apiName: 'MyApi',
   definitionFile: './definitions/myapi.yaml',
 });
+
+new Datastore(project, {
+  modelName: 'MyModel',
+  definitionFile: './definitions/mymodel.json',
+})
 
 project.synth();

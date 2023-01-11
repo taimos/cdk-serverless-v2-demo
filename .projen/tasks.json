@@ -72,6 +72,9 @@
           "exec": "rm -rf cdk.out/"
         },
         {
+          "exec": "rm -rf cdk.out/"
+        },
+        {
           "exec": "node .projenrc.js"
         },
         {

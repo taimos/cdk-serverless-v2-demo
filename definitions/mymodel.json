@@ -1,0 +1,71 @@
+{
+  "indexes": {
+    "primary": {
+      "hash": "PK",
+      "sort": "SK"
+    },
+    "GSI1": {
+      "hash": "GSI1PK",
+      "sort": "GSI1SK",
+      "project": "ALL"
+    },
+    "LSI1": {
+      "type": "local",
+      "sort": "lastUpdated",
+      "project": [
+        "id",
+        "lastUpdated",
+        "title"
+      ]
+    }
+  },
+  "models": {
+    "Todo": {
+      "PK": {
+        "type": "string",
+        "value": "TODO#${id}"
+      },
+      "SK": {
+        "type": "string",
+        "value": "TODO#${id}"
+      },
+      "id": {
+        "type": "string",
+        "required": true,
+        "generate": "uuid"
+      },
+      "GSI1PK": {
+        "type": "string",
+        "value": "TODOS"
+      },
+      "GSI1SK": {
+        "type": "string",
+        "value": "${state}#${title}"
+      },
+      "lastUpdated": {
+        "type": "string",
+        "required": true
+      },
+      "title": {
+        "type": "string",
+        "required": true
+      },
+      "description": {
+        "type": "string"
+      },
+      "state": {
+        "type": "string",
+        "enum": [
+          "OPEN",
+          "IN PROGRESS",
+          "DONE"
+        ],
+        "required": true,
+        "default": "OPEN"
+      }
+    }
+  },
+  "version": "0.1.0",
+  "format": "onetable:1.1.0",
+  "queries": {}
+}
