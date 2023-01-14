@@ -1,7 +1,8 @@
 import { App, CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { MyModelDatastore } from './generated/datastore.mymodel-construct.generated';
-import { RestApiMyApi } from './generated/rest.myapi-api.generated';
+import { MyApiRestApi } from './generated/rest.myapi-api.generated';
+import { TodoLifecycleWorkflow } from './generated/workflow.todolifecycle.generated';
 
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
@@ -9,13 +10,27 @@ export class MyStack extends Stack {
 
     const datastore = new MyModelDatastore(this, 'Datastore');
 
-    const api = new RestApiMyApi(this, 'RestApi', {
+    const api = new MyApiRestApi(this, 'RestApi', {
       stageName: 'dev',
       singleTableDatastore: datastore,
     });
 
+    const workflow = new TodoLifecycleWorkflow(this, 'Workflow', {
+      stateConfig: {
+        stageName: 'dev',
+        reminderLambda: {
+          handler: api.getFunctionForOperation('addTodo'),
+        },
+        table: {
+          table: datastore.table,
+          writable: true,
+        },
+      },
+    });
+
     new CfnOutput(this, 'ApiId', { value: api.api.restApiId });
     new CfnOutput(this, 'Table', { value: datastore.table.tableName });
+    new CfnOutput(this, 'SfnArn', { value: workflow.workflowArn });
   }
 }
 

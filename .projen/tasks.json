@@ -75,6 +75,9 @@
           "exec": "rm -rf cdk.out/"
         },
         {
+          "exec": "rm -rf cdk.out/"
+        },
+        {
           "exec": "node .projenrc.js"
         },
         {
@@ -137,7 +140,7 @@
       "description": "Generate Types from the OpenAPI specification",
       "steps": [
         {
-          "exec": "openapi-typescript ./definitions/myapi.yaml --output src/generated/rest.myapi-model.generated.ts"
+          "exec": "openapi-typescript ./src/definitions/myapi.yaml --output src/generated/rest.myapi-model.generated.ts"
         }
       ]
     },

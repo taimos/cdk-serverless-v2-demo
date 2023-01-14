@@ -33,6 +33,32 @@ export class RestApi extends CoreAspect {
         }
       }
     }
+    this.createConstructFile(`./src/generated/rest.${options.apiName.toLowerCase()}-api.generated.ts`);
+  }
+
+  protected createConstructFile(fileName: string) {
+
+    fs.writeFileSync(fileName, `import { Construct } from 'constructs';
+import { RestApi, RestApiProps } from '../sls/constructs';
+import { operations, paths } from './rest.${this.options.apiName.toLowerCase()}-model.generated';
+
+export interface ${this.options.apiName}RestApiProps extends Omit<RestApiProps<operations>, 'definitionFileName' | 'apiName'> {
+  //
+}
+
+export class ${this.options.apiName}RestApi extends RestApi<paths, operations> {
+
+  constructor(scope: Construct, id: string, props: ${this.options.apiName}RestApiProps) {
+    super(scope, id, {
+      ...props,
+      apiName: '${this.options.apiName}',
+      definitionFileName: '${this.options.definitionFile}',
+    });
+  }
+
+}`, {
+      encoding: 'utf-8',
+    });
   }
 
   protected addRestResource(apiSpec: OpenAPI3, path: string, method: string) {

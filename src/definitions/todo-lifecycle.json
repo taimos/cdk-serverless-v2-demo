@@ -1,0 +1,53 @@
+{
+  "Comment": "Manages the lifecycle of a ToDo",
+  "StartAt": "Wait 24h",
+  "States": {
+    "Wait 24h": {
+      "Type": "Wait",
+      "Next": "Load ToDo",
+      "TimestampPath": "$.reminderTimestamp"
+    },
+    "Load ToDo": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::dynamodb:getItem",
+      "Parameters": {
+        "TableName": "${table#DynamoDBTable}",
+        "Key": {
+          "PK": {
+            "S.$": "States.Format('TODO#{}', $.id)"
+          },
+          "SK": {
+            "S.$": "States.Format('TODO#{}', $.id)"
+          }
+        }
+      },
+      "Next": "Send Reminder",
+      "ResultPath": "$.details"
+    },
+    "Send Reminder": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${reminderLambda#LambdaFunction}",
+        "Payload": {
+          "id.$": "$.id",
+          "stageName": "${stageName}"
+        }
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "ResultPath": "$.reminder",
+      "End": true
+    }
+  }
+}

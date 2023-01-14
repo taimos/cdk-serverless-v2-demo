@@ -1,5 +1,5 @@
 import { awscdk } from "projen";
-import { Datastore, RestApi } from "./src/sls/projen";
+import { Datastore, RestApi, Workflow } from "./src/sls/projen";
 
 const project = new awscdk.AwsCdkTypeScriptApp({
   cdkVersion: '2.59.0',
@@ -19,12 +19,17 @@ const project = new awscdk.AwsCdkTypeScriptApp({
 
 new RestApi(project, {
   apiName: 'MyApi',
-  definitionFile: './definitions/myapi.yaml',
+  definitionFile: './src/definitions/myapi.yaml',
 });
 
 new Datastore(project, {
   modelName: 'MyModel',
-  definitionFile: './definitions/mymodel.json',
+  definitionFile: './src/definitions/mymodel.json',
+})
+
+new Workflow(project, {
+  workflowName: 'TodoLifecycle',
+  definitionFile: './src/definitions/todo-lifecycle.json',
 })
 
 project.synth();
