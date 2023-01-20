@@ -18,9 +18,6 @@ export class CoreAspect extends pj.Component {
       '@taimos/lambda-toolbox',
       'uuid',
     );
-
-    app.defaultTask!.prependExec('rm -rf cdk.out/');
-
   }
 
 }

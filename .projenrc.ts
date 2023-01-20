@@ -5,6 +5,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   cdkVersion: '2.59.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-serverless-v2-demo',
+  projenrcTs: true,
   deps: [
     'projen',
     'date-fns',
