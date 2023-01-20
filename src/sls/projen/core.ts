@@ -1,23 +1,32 @@
 import * as pj from 'projen';
 
-export interface CoreAspectOptions {
+export interface ServerlessProjectOptions extends pj.awscdk.AwsCdkTypeScriptAppOptions {
   //
 }
 
-export class CoreAspect extends pj.Component {
+export class ServerlessProject extends pj.awscdk.AwsCdkTypeScriptApp {
 
-  constructor(app: pj.awscdk.AwsCdkTypeScriptApp, _options: CoreAspectOptions = {}) {
-    super(app);
+  constructor(options: ServerlessProjectOptions) {
+    super({
+      ...options,
+      projenrcTs: true,
+      deps: [
+        ...options.deps ?? [],
+        '@taimos/lambda-toolbox',
+        'uuid',
+        'esbuild',
+        'js-yaml',
+        'openapi-typescript',
+      ],
+      devDeps: [
+        ...options.devDeps ?? [],
+        '@types/aws-lambda',
+        '@types/uuid',
+        '@types/lambda-log',
+        '@types/js-yaml',
+      ],
+    });
 
-    app.addDevDeps(
-      '@types/aws-lambda',
-      '@types/uuid',
-      '@types/lambda-log',
-    );
-    app.addDeps(
-      '@taimos/lambda-toolbox',
-      'uuid',
-    );
   }
 
 }

@@ -1,17 +1,16 @@
 import * as fs from 'fs';
 import { OneSchema } from 'dynamodb-onetable';
 import * as pj from 'projen';
-import { CoreAspect, CoreAspectOptions } from './core';
 
-export interface DatastoreOptions extends CoreAspectOptions {
+export interface DatastoreOptions {
   readonly modelName: string;
   readonly definitionFile: string;
 }
 
-export class Datastore extends CoreAspect {
+export class Datastore extends pj.Component {
 
   constructor(app: pj.awscdk.AwsCdkTypeScriptApp, protected options: DatastoreOptions) {
-    super(app, options);
+    super(app);
 
     app.addDeps('dynamodb-onetable');
 

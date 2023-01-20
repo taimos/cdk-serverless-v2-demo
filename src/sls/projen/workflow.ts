@@ -1,8 +1,7 @@
 import * as fs from 'fs';
 import * as pj from 'projen';
-import { CoreAspect, CoreAspectOptions } from './core';
 
-export interface WorkflowOptions extends CoreAspectOptions {
+export interface WorkflowOptions {
   readonly workflowName: string;
   readonly definitionFile: string;
 }
@@ -13,10 +12,10 @@ interface VariableDefinition {
   readonly type: string;
 }
 
-export class Workflow extends CoreAspect {
+export class Workflow extends pj.Component {
 
   constructor(app: pj.awscdk.AwsCdkTypeScriptApp, protected options: WorkflowOptions) {
-    super(app, options);
+    super(app);
 
     const workflowDefinition = fs.readFileSync(options.definitionFile).toString();
     const matches = workflowDefinition.match(/\$\{[a-zA-Z0-9#]*\}/g)?.map(match => match.substring(2, match.length - 1));

@@ -2,17 +2,16 @@ import * as fs from 'fs';
 import * as yaml from 'js-yaml';
 import { OpenAPI3, OperationObject, PathItemObject } from 'openapi-typescript';
 import * as pj from 'projen';
-import { CoreAspect, CoreAspectOptions } from './core';
 
-export interface RestApiOptions extends CoreAspectOptions {
+export interface RestApiOptions {
   readonly apiName: string;
   readonly definitionFile: string;
 }
 
-export class RestApi extends CoreAspect {
+export class RestApi extends pj.Component {
 
   constructor(app: pj.awscdk.AwsCdkTypeScriptApp, protected options: RestApiOptions) {
-    super(app, options);
+    super(app);
 
     const generateTask = app.addTask(`generate:api:${options.apiName.toLowerCase()}`, {
       exec: `openapi-typescript ${options.definitionFile} --output src/generated/rest.${options.apiName.toLowerCase()}-model.generated.ts`,
