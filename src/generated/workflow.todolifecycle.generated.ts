@@ -1,5 +1,5 @@
 import * as constructs from 'constructs';
-import * as sls from '../sls/constructs/workflow';
+import * as sls from '@taimos/cdk-serverless-v2/lib/constructs';
 
 export interface TodoLifecycleWorkflowProps extends Omit<sls.WorkflowProps, 'definitionFileName' | 'definitionSubstitutions'> {
   readonly stateConfig: {

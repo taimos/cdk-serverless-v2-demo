@@ -1,4 +1,4 @@
-import { Datastore, RestApi, ServerlessProject, Workflow } from "./src/sls/projen";
+import { Datastore, RestApi, ServerlessProject, Workflow } from '@taimos/cdk-serverless-v2/lib/projen';
 
 const project = new ServerlessProject({
   cdkVersion: '2.59.0',
@@ -6,6 +6,7 @@ const project = new ServerlessProject({
   name: 'cdk-serverless-v2-demo',
   deps: [
     'projen',
+    '@taimos/cdk-serverless-v2',
     'date-fns',
   ],
 });
@@ -18,11 +19,11 @@ new RestApi(project, {
 new Datastore(project, {
   modelName: 'MyModel',
   definitionFile: './src/definitions/mymodel.json',
-})
+});
 
 new Workflow(project, {
   workflowName: 'TodoLifecycle',
   definitionFile: './src/definitions/todo-lifecycle.json',
-})
+});
 
 project.synth();

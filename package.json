@@ -49,6 +49,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
+    "@taimos/cdk-serverless-v2": "^1.2.1",
     "@taimos/lambda-toolbox": "^0.0.184",
     "aws-cdk-lib": "^2.59.0",
     "constructs": "^10.0.5",

@@ -1665,6 +1665,15 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
+"@taimos/cdk-serverless-v2@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@taimos/cdk-serverless-v2/-/cdk-serverless-v2-1.2.1.tgz#3ffabef03df9084e926613be54a180bebaabd18b"
+  integrity sha512-1i4Dnm+eIhwIpk/AO51N6I78nzbXoZ6+1T1fF6aZLpi2vAvVYZkXoGjkWaAso9qv0vkJKAZyQVcaqjZgDGB7ug==
+  dependencies:
+    date-fns "^2.29.3"
+    js-yaml "^4.1.0"
+    projen "^0.65.17"
+
 "@taimos/lambda-toolbox@^0.0.184":
   version "0.0.184"
   resolved "https://registry.yarnpkg.com/@taimos/lambda-toolbox/-/lambda-toolbox-0.0.184.tgz#fd49fe00bf7b621a15c8108513fc8427e12d9338"
@@ -5446,6 +5455,27 @@ progress@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
+
+projen@^0.65.17:
+  version "0.65.86"
+  resolved "https://registry.yarnpkg.com/projen/-/projen-0.65.86.tgz#14e720154ee1b3a576cb3b646401adeba18a6c5f"
+  integrity sha512-RWzkEQDi4QDorx/UOfUkLcARUmygjul3JBVxOtIY7RMAGzRww/PRdw1Y++CB3DhqC9xh+RCXm84g/5umi1/sxg==
+  dependencies:
+    "@iarna/toml" "^2.2.5"
+    case "^1.6.3"
+    chalk "^4.1.2"
+    comment-json "4.2.2"
+    conventional-changelog-config-spec "^2.1.0"
+    fast-json-patch "^3.1.1"
+    fs-extra "^9.1.0"
+    glob "^7"
+    ini "^2.0.0"
+    semver "^7.3.8"
+    shx "^0.3.4"
+    xmlbuilder2 "^2.4.1"
+    yaml "2.0.0"
+    yargs "^16.2.0"
+    zlib "^1.0.5"
 
 projen@^0.66.9:
   version "0.66.9"

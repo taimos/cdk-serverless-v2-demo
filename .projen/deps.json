@@ -96,6 +96,10 @@
       "type": "build"
     },
     {
+      "name": "@taimos/cdk-serverless-v2",
+      "type": "runtime"
+    },
+    {
       "name": "@taimos/lambda-toolbox",
       "type": "runtime"
     },
