@@ -10,10 +10,10 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@aws-cdk/asset-awscli-v1@^2.2.30":
-  version "2.2.49"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/asset-awscli-v1/-/asset-awscli-v1-2.2.49.tgz#af7618a3a39bf103f82d7aa396efa50e6ae79092"
-  integrity sha512-Qd5bdLlC/sphWQQPNn7etKXWCh+fij7DWxtkIwvhhZ+LM6UEApGLS8sBLBQcRO2ZQdEuNb+zeClUy+3DNojfeg==
+"@aws-cdk/asset-awscli-v1@^2.2.49":
+  version "2.2.52"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/asset-awscli-v1/-/asset-awscli-v1-2.2.52.tgz#716aaa02b0cca8ba6d0318a0d8702bcf0023cdc3"
+  integrity sha512-9dBPrvByWrUOcs5Rjwv08FWSummo1Uk/EgE3dCFDqvIqlSTudEmu6TGU3zrs00rfcAjqDv6gBuSttzG5f9tfdQ==
 
 "@aws-cdk/asset-kubectl-v20@^2.1.1":
   version "2.1.1"
@@ -1665,10 +1665,10 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
-"@taimos/cdk-serverless-v2@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@taimos/cdk-serverless-v2/-/cdk-serverless-v2-1.2.1.tgz#3ffabef03df9084e926613be54a180bebaabd18b"
-  integrity sha512-1i4Dnm+eIhwIpk/AO51N6I78nzbXoZ6+1T1fF6aZLpi2vAvVYZkXoGjkWaAso9qv0vkJKAZyQVcaqjZgDGB7ug==
+"@taimos/cdk-serverless-v2@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@taimos/cdk-serverless-v2/-/cdk-serverless-v2-1.3.0.tgz#853cb06d2269d7a9eef600d18ed666161c6b492f"
+  integrity sha512-I1vDJ1+zd8TPgbE96RWiUdQOlMD7FdNlloAPNrfKQzymmxlB6LCO7XUIixlIQ7l3kgfVZmGkVVjYphNwNH68gQ==
   dependencies:
     date-fns "^2.29.3"
     js-yaml "^4.1.0"
@@ -2136,28 +2136,28 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-aws-cdk-lib@^2.59.0:
-  version "2.59.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.59.0.tgz#488967569bfe937dd64102a4131831f1b24e34df"
-  integrity sha512-FT6QRsou8TibQcz/TqI3rEkB9EBVF5Om5lv9MXz/5qiKehWRbKZVX0I0l/SSAvGSmdTU5Pfr+WRBTk51oNMAdw==
+aws-cdk-lib@^2.60.0:
+  version "2.62.2"
+  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.62.2.tgz#520d93af6c593381e92e8dc9a768fa770fa3223c"
+  integrity sha512-ynyoEFQckICFJzbUd89pWjol3GGbxRF05E8BCPEyy++vLHJZdqaJxRL4REl4lrdznnkb1kvxtBSGg4cOkR4o3w==
   dependencies:
-    "@aws-cdk/asset-awscli-v1" "^2.2.30"
+    "@aws-cdk/asset-awscli-v1" "^2.2.49"
     "@aws-cdk/asset-kubectl-v20" "^2.1.1"
     "@aws-cdk/asset-node-proxy-agent-v5" "^2.0.38"
     "@balena/dockerignore" "^1.0.2"
     case "1.6.3"
     fs-extra "^9.1.0"
-    ignore "^5.2.1"
+    ignore "^5.2.4"
     jsonschema "^1.4.1"
     minimatch "^3.1.2"
-    punycode "^2.1.1"
+    punycode "^2.2.0"
     semver "^7.3.8"
     yaml "1.10.2"
 
-aws-cdk@^2.59.0:
-  version "2.59.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.59.0.tgz#3e1daa9d78df07780ead10c73bc87b478fb7a263"
-  integrity sha512-5xKh+nC6wLsjYGwA+YYbX9ZonJLYmthxSZy8pK/Bm9rL2mFpnMKvQZJz67L6ghOt1XumoB1vZbIhptln68jTuw==
+aws-cdk@^2.60.0:
+  version "2.62.2"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.62.2.tgz#366708c918c13158e2d9e335f6e70c8bb7fb9c08"
+  integrity sha512-fACUQEdc43AfiqKKXUZLuHB2VADLU965hl50Fn6BhMemFmUsc+iS/GFfOwvfCUO3/iaRtsn/gk+dQ3zZ+snKRw==
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -2810,7 +2810,7 @@ dot-prop@^6.0.1:
   dependencies:
     is-obj "^2.0.0"
 
-dynamodb-onetable@*:
+dynamodb-onetable@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/dynamodb-onetable/-/dynamodb-onetable-2.5.1.tgz#93f2dd1819e3ecfde6ad5450acdda3c721ffa0c9"
   integrity sha512-yQUW/x+oz5zR5r5PVEWmx1XKb/zhLVATy9JFpBgWcP0rDnsbKBnsXxkzyxFg1GdeONJXjl28RuKeVX7b6I0AzA==
@@ -3759,7 +3759,7 @@ ignore-walk@^6.0.0:
   dependencies:
     minimatch "^5.0.1"
 
-ignore@^5.2.0, ignore@^5.2.1:
+ignore@^5.2.0, ignore@^5.2.4:
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.4.tgz#a291c0c6178ff1b960befe47fcdec301674a6324"
   integrity sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==
@@ -5537,10 +5537,15 @@ punycode@1.3.2:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
   integrity sha512-RofWgt/7fL5wP1Y7fxE7/EmTLzQVnB0ycyibJ0OOHIlJqTNzglYFxVwETOcIoJqJmpDXJ9xImDv+Fq34F/d4Dw==
 
-punycode@^2.1.0, punycode@^2.1.1:
+punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
+
+punycode@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
+  integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
 pupa@^3.1.0:
   version "3.1.0"
