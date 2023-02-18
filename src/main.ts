@@ -1,3 +1,4 @@
+import { Authentication } from '@taimos/cdk-serverless-v2/lib/constructs/authentication';
 import { App, CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { MyModelDatastore } from './generated/datastore.mymodel-construct.generated';
@@ -10,9 +11,17 @@ export class MyStack extends Stack {
 
     const datastore = new MyModelDatastore(this, 'Datastore');
 
+    const authentication = new Authentication(this, 'Auth', {
+      userPoolName: 'myPool',
+      triggers: {
+        preTokenGeneration: true,
+      },
+    });
+
     const api = new MyApiRestApi(this, 'RestApi', {
       stageName: 'dev',
       singleTableDatastore: datastore,
+      authentication,
     });
 
     const workflow = new TodoLifecycleWorkflow(this, 'Workflow', {

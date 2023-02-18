@@ -108,6 +108,11 @@ exports[`Snapshot 1`] = `
         "Ref": "RestApiFA9A4412",
       },
     },
+    "AuthUserPoolIdC0605E59": {
+      "Value": {
+        "Ref": "AuthUserPool8115E87F",
+      },
+    },
     "RestApiEndpoint575871DF": {
       "Value": {
         "Fn::Join": [
@@ -156,6 +161,154 @@ exports[`Snapshot 1`] = `
     },
   },
   "Resources": {
+    "AuthPreTokenGenerationFunctionFDCABDDD": {
+      "DependsOn": [
+        "AuthPreTokenGenerationFunctionServiceRole7DBD718D",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "964b16616d1de437fcf32268fc89e4256b1e661c647fd3c0b222cd4d94e14657.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "AuthPreTokenGenerationFunctionServiceRole7DBD718D",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 5,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AuthPreTokenGenerationFunctionServiceRole7DBD718D": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "AuthUserPool8115E87F": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AccountRecoverySetting": {
+          "RecoveryMechanisms": [
+            {
+              "Name": "verified_phone_number",
+              "Priority": 1,
+            },
+            {
+              "Name": "verified_email",
+              "Priority": 2,
+            },
+          ],
+        },
+        "AdminCreateUserConfig": {
+          "AllowAdminCreateUserOnly": true,
+        },
+        "AutoVerifiedAttributes": [
+          "email",
+        ],
+        "EmailVerificationMessage": "The verification code to your new account is {####}",
+        "EmailVerificationSubject": "Verify your new account",
+        "LambdaConfig": {
+          "PreTokenGeneration": {
+            "Fn::GetAtt": [
+              "AuthPreTokenGenerationFunctionFDCABDDD",
+              "Arn",
+            ],
+          },
+        },
+        "Policies": {
+          "PasswordPolicy": {
+            "MinimumLength": 12,
+            "RequireLowercase": false,
+            "RequireNumbers": false,
+            "RequireSymbols": false,
+            "RequireUppercase": false,
+          },
+        },
+        "Schema": [
+          {
+            "Mutable": true,
+            "Name": "name",
+            "Required": true,
+          },
+          {
+            "Mutable": false,
+            "Name": "email",
+            "Required": true,
+          },
+        ],
+        "SmsVerificationMessage": "The verification code to your new account is {####}",
+        "UserPoolName": "myPool",
+        "UsernameAttributes": [
+          "email",
+        ],
+        "UsernameConfiguration": {
+          "CaseSensitive": false,
+        },
+        "VerificationMessageTemplate": {
+          "DefaultEmailOption": "CONFIRM_WITH_CODE",
+          "EmailMessage": "The verification code to your new account is {####}",
+          "EmailSubject": "Verify your new account",
+          "SmsMessage": "The verification code to your new account is {####}",
+        },
+      },
+      "Type": "AWS::Cognito::UserPool",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "AuthUserPoolPreTokenGenerationCognito6E456AA2": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "AuthPreTokenGenerationFunctionFDCABDDD",
+            "Arn",
+          ],
+        },
+        "Principal": "cognito-idp.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "AuthUserPool8115E87F",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
     "DatastoreBBD23A29": {
       "DeletionPolicy": "Retain",
       "Properties": {
@@ -289,134 +442,7 @@ exports[`Snapshot 1`] = `
       "Type": "AWS::IAM::Role",
       "UpdateReplacePolicy": "Retain",
     },
-    "RestApiDELETEtodosidApiPermissionTesttestRestApi82E46FF4DELETEtodosidC03662FC": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "RestApiFnremoveTodo0814FD47",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              {
-                "Ref": "RestApiFA9A4412",
-              },
-              "/test-invoke-stage/DELETE/todos/*",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "RestApiDELETEtodosidApiPermissiontestRestApi82E46FF4DELETEtodosidA49E5D79": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "RestApiFnremoveTodo0814FD47",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              {
-                "Ref": "RestApiFA9A4412",
-              },
-              "/",
-              {
-                "Ref": "RestApiDeploymentStageprod09FC9B34",
-              },
-              "/DELETE/todos/*",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "RestApiDELETEtodosidB00C9197": {
-      "Properties": {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "DELETE",
-        "Integration": {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":apigateway:",
-                {
-                  "Ref": "AWS::Region",
-                },
-                ":lambda:path/2015-03-31/functions/",
-                {
-                  "Fn::GetAtt": [
-                    "RestApiFnremoveTodo0814FD47",
-                    "Arn",
-                  ],
-                },
-                "/invocations",
-              ],
-            ],
-          },
-        },
-        "OperationName": "removeTodo",
-        "ResourceId": {
-          "Ref": "RestApitodosid5F817984",
-        },
-        "RestApiId": {
-          "Ref": "RestApiFA9A4412",
-        },
-      },
-      "Type": "AWS::ApiGateway::Method",
-    },
-    "RestApiDeploymentEFEC2370181fe46b0d410ac68b64552cb6fcbaa6": {
-      "DependsOn": [
-        "RestApiDELETEtodosidB00C9197",
-        "RestApiGETtodosid931B5533",
-        "RestApiGETtodos9B13369A",
-        "RestApiPOSTtodos046BCEDD",
-        "RestApitodosid5F817984",
-        "RestApitodos48AEB957",
-      ],
+    "RestApiDeploymentEFEC237022b2de8e33d883c3ad472444d938e8cc": {
       "Properties": {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": {
@@ -431,7 +457,7 @@ exports[`Snapshot 1`] = `
       ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "RestApiDeploymentEFEC2370181fe46b0d410ac68b64552cb6fcbaa6",
+          "Ref": "RestApiDeploymentEFEC237022b2de8e33d883c3ad472444d938e8cc",
         },
         "RestApiId": {
           "Ref": "RestApiFA9A4412",
@@ -442,6 +468,353 @@ exports[`Snapshot 1`] = `
     },
     "RestApiFA9A4412": {
       "Properties": {
+        "Body": {
+          "components": {
+            "schemas": {
+              "AddTodo": {
+                "properties": {
+                  "description": {
+                    "type": "string",
+                  },
+                  "title": {
+                    "type": "string",
+                  },
+                },
+                "required": [
+                  "title",
+                  "description",
+                ],
+                "type": "object",
+              },
+              "Todo": {
+                "properties": {
+                  "description": {
+                    "type": "string",
+                  },
+                  "id": {
+                    "type": "string",
+                  },
+                  "lastUpdate": {
+                    "format": "date-time",
+                    "type": "string",
+                  },
+                  "state": {
+                    "type": "string",
+                  },
+                  "title": {
+                    "type": "string",
+                  },
+                },
+                "required": [
+                  "id",
+                  "state",
+                  "title",
+                  "description",
+                  "lastUpdate",
+                ],
+                "type": "object",
+              },
+            },
+          },
+          "info": {
+            "contact": {
+              "email": "info@taimos.de",
+              "name": "Thorsten Höger",
+            },
+            "license": {
+              "name": "free to use",
+            },
+            "title": "Serverless Demo",
+            "version": "1.0",
+          },
+          "openapi": "3.0.1",
+          "paths": {
+            "/openapi.json": {
+              "get": {
+                "description": "Returns the raw OpenAPI spec of this API",
+                "operationId": "_spec",
+                "responses": {
+                  "200": {
+                    "content": {
+                      "application/openapi+json": {},
+                    },
+                    "description": "OpenAPI spec of this API",
+                  },
+                },
+                "summary": "Returns the raw OpenAPI spec of this API",
+                "x-amazon-apigateway-integration": {
+                  "httpMethod": "GET",
+                  "payloadFormatVersion": "1.0",
+                  "requestTemplates": {
+                    "application/json": "{'statusCode': 200}",
+                  },
+                  "responses": {
+                    "200": {
+                      "responseTemplates": {
+                        "application/openapi+json": "{"openapi":"3.0.1","info":{"title":"Serverless Demo","contact":{"name":"Thorsten Höger","email":"info@taimos.de"},"license":{"name":"free to use"},"version":"1.0"},"tags":[{"name":"info"},{"name":"admin"}],"paths":{"/todos":{"get":{"tags":["admin"],"summary":"return list of todos","operationId":"getTodos","responses":{"200":{"description":"successful operation","content":{"application/json":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Todo"}}},"text/calendar":{"schema":{"type":"string"}}}}}},"post":{"tags":["admin"],"summary":"add new todo","operationId":"addTodo","requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AddTodo"}}}},"responses":{"201":{"description":"successful operation","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Todo"}}}},"401":{"description":"you are not logged in","content":{}},"403":{"description":"you are not authorized to add todos","content":{}}}}},"/todos/{id}":{"get":{"tags":["admin"],"summary":"get a todo by its id","operationId":"getTodoById","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"successful operation","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Todo"}}}}}},"delete":{"tags":["admin"],"summary":"delete a todo","operationId":"removeTodo","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"successful operation","content":{}},"401":{"description":"you are not logged in","content":{}},"403":{"description":"you are not authorized to remove todos","content":{}}}}}},"components":{"schemas":{"Todo":{"type":"object","required":["id","state","title","description","lastUpdate"],"properties":{"id":{"type":"string"},"state":{"type":"string"},"title":{"type":"string"},"description":{"type":"string"},"lastUpdate":{"type":"string","format":"date-time"}}},"AddTodo":{"type":"object","required":["title","description"],"properties":{"title":{"type":"string"},"description":{"type":"string"}}}}}}",
+                      },
+                      "statusCode": 200,
+                    },
+                  },
+                  "type": "mock",
+                },
+              },
+            },
+            "/todos": {
+              "get": {
+                "operationId": "getTodos",
+                "responses": {
+                  "200": {
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "items": {
+                            "$ref": "#/components/schemas/Todo",
+                          },
+                          "type": "array",
+                        },
+                      },
+                      "text/calendar": {
+                        "schema": {
+                          "type": "string",
+                        },
+                      },
+                    },
+                    "description": "successful operation",
+                  },
+                },
+                "summary": "return list of todos",
+                "tags": [
+                  "admin",
+                ],
+                "x-amazon-apigateway-integration": {
+                  "httpMethod": "POST",
+                  "passthroughBehavior": "when_no_templates",
+                  "payloadFormatVersion": "1.0",
+                  "type": "aws_proxy",
+                  "uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region",
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "RestApiFngetTodos84695404",
+                            "Arn",
+                          ],
+                        },
+                        "/invocations",
+                      ],
+                    ],
+                  },
+                },
+              },
+              "post": {
+                "operationId": "addTodo",
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/AddTodo",
+                      },
+                    },
+                  },
+                  "required": true,
+                },
+                "responses": {
+                  "201": {
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Todo",
+                        },
+                      },
+                    },
+                    "description": "successful operation",
+                  },
+                  "401": {
+                    "content": {},
+                    "description": "you are not logged in",
+                  },
+                  "403": {
+                    "content": {},
+                    "description": "you are not authorized to add todos",
+                  },
+                },
+                "summary": "add new todo",
+                "tags": [
+                  "admin",
+                ],
+                "x-amazon-apigateway-integration": {
+                  "httpMethod": "POST",
+                  "passthroughBehavior": "when_no_templates",
+                  "payloadFormatVersion": "1.0",
+                  "type": "aws_proxy",
+                  "uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region",
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "RestApiFnaddTodoBD56C0AE",
+                            "Arn",
+                          ],
+                        },
+                        "/invocations",
+                      ],
+                    ],
+                  },
+                },
+                "x-codegen-request-body-name": "body",
+              },
+            },
+            "/todos/{id}": {
+              "delete": {
+                "operationId": "removeTodo",
+                "parameters": [
+                  {
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "schema": {
+                      "type": "string",
+                    },
+                  },
+                ],
+                "responses": {
+                  "200": {
+                    "content": {},
+                    "description": "successful operation",
+                  },
+                  "401": {
+                    "content": {},
+                    "description": "you are not logged in",
+                  },
+                  "403": {
+                    "content": {},
+                    "description": "you are not authorized to remove todos",
+                  },
+                },
+                "summary": "delete a todo",
+                "tags": [
+                  "admin",
+                ],
+                "x-amazon-apigateway-integration": {
+                  "httpMethod": "POST",
+                  "passthroughBehavior": "when_no_templates",
+                  "payloadFormatVersion": "1.0",
+                  "type": "aws_proxy",
+                  "uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region",
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "RestApiFnremoveTodo0814FD47",
+                            "Arn",
+                          ],
+                        },
+                        "/invocations",
+                      ],
+                    ],
+                  },
+                },
+              },
+              "get": {
+                "operationId": "getTodoById",
+                "parameters": [
+                  {
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "schema": {
+                      "type": "string",
+                    },
+                  },
+                ],
+                "responses": {
+                  "200": {
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Todo",
+                        },
+                      },
+                    },
+                    "description": "successful operation",
+                  },
+                },
+                "summary": "get a todo by its id",
+                "tags": [
+                  "admin",
+                ],
+                "x-amazon-apigateway-integration": {
+                  "httpMethod": "POST",
+                  "passthroughBehavior": "when_no_templates",
+                  "payloadFormatVersion": "1.0",
+                  "type": "aws_proxy",
+                  "uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region",
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "RestApiFngetTodoById15730978",
+                            "Arn",
+                          ],
+                        },
+                        "/invocations",
+                      ],
+                    ],
+                  },
+                },
+              },
+            },
+          },
+          "tags": [
+            {
+              "name": "info",
+            },
+            {
+              "name": "admin",
+            },
+          ],
+        },
         "Name": "MyApi [dev]",
       },
       "Type": "AWS::ApiGateway::RestApi",
@@ -456,7 +829,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "e2eccd0e3ebc52742b6928e34c13d9fc29a5a5aa4b382e44b56d6842633c52d7.zip",
+          "S3Key": "6bd4d7eb2679390f8613f64d22ac40ad964fa0b42201b9609295bf69959161a8.zip",
         },
         "Description": "[dev] post /todos - add new todo",
         "Environment": {
@@ -465,6 +838,9 @@ exports[`Snapshot 1`] = `
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
+            },
+            "USER_POOL_ID": {
+              "Ref": "AuthUserPool8115E87F",
             },
           },
         },
@@ -484,6 +860,43 @@ exports[`Snapshot 1`] = `
         ],
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "RestApiFnaddTodoRestApiInvoke1CEC24C3": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "RestApiFnaddTodoBD56C0AE",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "RestApiFA9A4412",
+              },
+              "/*/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
     },
     "RestApiFnaddTodoServiceRoleC30FAF74": {
       "Properties": {
@@ -587,7 +1000,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "80be2a18bbc89acd05c17d994a7e28c3dc4bbd8177848d3a2fc5479b2e5373bb.zip",
+          "S3Key": "9ebc6ecfba9763c50a344d5ab124603172465c21a335dd4f72e233b42f08201b.zip",
         },
         "Description": "[dev] get /todos/{id} - get a todo by its id",
         "Environment": {
@@ -596,6 +1009,9 @@ exports[`Snapshot 1`] = `
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
+            },
+            "USER_POOL_ID": {
+              "Ref": "AuthUserPool8115E87F",
             },
           },
         },
@@ -615,6 +1031,43 @@ exports[`Snapshot 1`] = `
         ],
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "RestApiFngetTodoByIdRestApiInvokeA9609D36": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "RestApiFngetTodoById15730978",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "RestApiFA9A4412",
+              },
+              "/*/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
     },
     "RestApiFngetTodoByIdServiceRole63DF489C": {
       "Properties": {
@@ -714,7 +1167,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "23e3abb6a2d5f7caa02c2811342a701bdc679a4aca27803225e32f851708fb5a.zip",
+          "S3Key": "6fb3403e740e77d255d5962aa31c257f9399dc739542326a5533610973525cfa.zip",
         },
         "Description": "[dev] get /todos - return list of todos",
         "Environment": {
@@ -723,6 +1176,9 @@ exports[`Snapshot 1`] = `
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
+            },
+            "USER_POOL_ID": {
+              "Ref": "AuthUserPool8115E87F",
             },
           },
         },
@@ -742,6 +1198,43 @@ exports[`Snapshot 1`] = `
         ],
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "RestApiFngetTodosRestApiInvokeFE87AE05": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "RestApiFngetTodos84695404",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "RestApiFA9A4412",
+              },
+              "/*/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
     },
     "RestApiFngetTodosServiceRole432001C6": {
       "Properties": {
@@ -841,7 +1334,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "92c4738e2229c35571ff04dfdd7ae90ae572d7d7349110cc490481e455b63aef.zip",
+          "S3Key": "cf15322c4b72df1b12f1c73b0e54a32f4c643d8d551371dd331660f541eba4f1.zip",
         },
         "Description": "[dev] delete /todos/{id} - delete a todo",
         "Environment": {
@@ -850,6 +1343,9 @@ exports[`Snapshot 1`] = `
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
+            },
+            "USER_POOL_ID": {
+              "Ref": "AuthUserPool8115E87F",
             },
           },
         },
@@ -869,6 +1365,43 @@ exports[`Snapshot 1`] = `
         ],
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "RestApiFnremoveTodoRestApiInvokeF6CD2233": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "RestApiFnremoveTodo0814FD47",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "RestApiFA9A4412",
+              },
+              "/*/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
     },
     "RestApiFnremoveTodoServiceRole791BD4D5": {
       "Properties": {
@@ -961,390 +1494,6 @@ exports[`Snapshot 1`] = `
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "RestApiGETtodos9B13369A": {
-      "Properties": {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "GET",
-        "Integration": {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":apigateway:",
-                {
-                  "Ref": "AWS::Region",
-                },
-                ":lambda:path/2015-03-31/functions/",
-                {
-                  "Fn::GetAtt": [
-                    "RestApiFngetTodos84695404",
-                    "Arn",
-                  ],
-                },
-                "/invocations",
-              ],
-            ],
-          },
-        },
-        "OperationName": "getTodos",
-        "ResourceId": {
-          "Ref": "RestApitodos48AEB957",
-        },
-        "RestApiId": {
-          "Ref": "RestApiFA9A4412",
-        },
-      },
-      "Type": "AWS::ApiGateway::Method",
-    },
-    "RestApiGETtodosApiPermissionTesttestRestApi82E46FF4GETtodos0F37D9B4": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "RestApiFngetTodos84695404",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              {
-                "Ref": "RestApiFA9A4412",
-              },
-              "/test-invoke-stage/GET/todos",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "RestApiGETtodosApiPermissiontestRestApi82E46FF4GETtodosB617393A": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "RestApiFngetTodos84695404",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              {
-                "Ref": "RestApiFA9A4412",
-              },
-              "/",
-              {
-                "Ref": "RestApiDeploymentStageprod09FC9B34",
-              },
-              "/GET/todos",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "RestApiGETtodosid931B5533": {
-      "Properties": {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "GET",
-        "Integration": {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":apigateway:",
-                {
-                  "Ref": "AWS::Region",
-                },
-                ":lambda:path/2015-03-31/functions/",
-                {
-                  "Fn::GetAtt": [
-                    "RestApiFngetTodoById15730978",
-                    "Arn",
-                  ],
-                },
-                "/invocations",
-              ],
-            ],
-          },
-        },
-        "OperationName": "getTodoById",
-        "ResourceId": {
-          "Ref": "RestApitodosid5F817984",
-        },
-        "RestApiId": {
-          "Ref": "RestApiFA9A4412",
-        },
-      },
-      "Type": "AWS::ApiGateway::Method",
-    },
-    "RestApiGETtodosidApiPermissionTesttestRestApi82E46FF4GETtodosidFDB3C21F": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "RestApiFngetTodoById15730978",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              {
-                "Ref": "RestApiFA9A4412",
-              },
-              "/test-invoke-stage/GET/todos/*",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "RestApiGETtodosidApiPermissiontestRestApi82E46FF4GETtodosid6ACB1EAC": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "RestApiFngetTodoById15730978",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              {
-                "Ref": "RestApiFA9A4412",
-              },
-              "/",
-              {
-                "Ref": "RestApiDeploymentStageprod09FC9B34",
-              },
-              "/GET/todos/*",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "RestApiPOSTtodos046BCEDD": {
-      "Properties": {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "POST",
-        "Integration": {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":apigateway:",
-                {
-                  "Ref": "AWS::Region",
-                },
-                ":lambda:path/2015-03-31/functions/",
-                {
-                  "Fn::GetAtt": [
-                    "RestApiFnaddTodoBD56C0AE",
-                    "Arn",
-                  ],
-                },
-                "/invocations",
-              ],
-            ],
-          },
-        },
-        "OperationName": "addTodo",
-        "ResourceId": {
-          "Ref": "RestApitodos48AEB957",
-        },
-        "RestApiId": {
-          "Ref": "RestApiFA9A4412",
-        },
-      },
-      "Type": "AWS::ApiGateway::Method",
-    },
-    "RestApiPOSTtodosApiPermissionTesttestRestApi82E46FF4POSTtodos423F68D4": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "RestApiFnaddTodoBD56C0AE",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              {
-                "Ref": "RestApiFA9A4412",
-              },
-              "/test-invoke-stage/POST/todos",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "RestApiPOSTtodosApiPermissiontestRestApi82E46FF4POSTtodosAF4A868E": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "RestApiFnaddTodoBD56C0AE",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              {
-                "Ref": "RestApiFA9A4412",
-              },
-              "/",
-              {
-                "Ref": "RestApiDeploymentStageprod09FC9B34",
-              },
-              "/POST/todos",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "RestApitodos48AEB957": {
-      "Properties": {
-        "ParentId": {
-          "Fn::GetAtt": [
-            "RestApiFA9A4412",
-            "RootResourceId",
-          ],
-        },
-        "PathPart": "todos",
-        "RestApiId": {
-          "Ref": "RestApiFA9A4412",
-        },
-      },
-      "Type": "AWS::ApiGateway::Resource",
-    },
-    "RestApitodosid5F817984": {
-      "Properties": {
-        "ParentId": {
-          "Ref": "RestApitodos48AEB957",
-        },
-        "PathPart": "{id}",
-        "RestApiId": {
-          "Ref": "RestApiFA9A4412",
-        },
-      },
-      "Type": "AWS::ApiGateway::Resource",
     },
     "Workflow193EF7C1": {
       "DependsOn": [
