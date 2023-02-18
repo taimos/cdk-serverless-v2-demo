@@ -61,7 +61,7 @@ export interface operations {
   };
   addTodo: {
     /** add new todo */
-    requestBody?: {
+    requestBody: {
       content: {
         "application/json": components["schemas"]["AddTodo"];
       };

@@ -35,6 +35,7 @@ paths:
       summary: add new todo
       operationId: addTodo
       requestBody:
+        required: true
         content:
           application/json:
             schema:

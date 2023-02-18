@@ -71,10 +71,6 @@
       "type": "build"
     },
     {
-      "name": "json-schema",
-      "type": "build"
-    },
-    {
       "name": "npm-check-updates",
       "version": "^16",
       "type": "build"
@@ -96,11 +92,15 @@
       "type": "build"
     },
     {
-      "name": "@taimos/cdk-serverless-v2",
+      "name": "@aws-sdk/client-dynamodb",
       "type": "runtime"
     },
     {
-      "name": "@taimos/lambda-toolbox",
+      "name": "@aws-sdk/lib-dynamodb",
+      "type": "runtime"
+    },
+    {
+      "name": "@taimos/cdk-serverless-v2",
       "type": "runtime"
     },
     {

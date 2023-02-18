@@ -1,8 +1,8 @@
-import { http } from '@taimos/lambda-toolbox';
+import { api } from '@taimos/cdk-serverless-v2/lib/lambda';
 import { Todo, Index_GSI1_Name } from '../generated/datastore.mymodel-model.generated';
 import { operations } from '../generated/rest.myapi-model.generated';
 
-export const handler = http.createOpenApiHandler<operations['getTodos']>(async (ctx) => {
+export const handler = api.createOpenApiHandler<operations['getTodos']>(async (ctx) => {
   ctx.logger.info(JSON.stringify(ctx.event));
   const list = await Todo.find({ GSI1PK: 'TODOS', GSI1SK: { begins_with: 'OPEN' } }, { index: Index_GSI1_Name });
 

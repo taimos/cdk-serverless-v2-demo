@@ -1,5 +1,10 @@
-import { dynamodb } from '@taimos/lambda-toolbox';
 import { Model, Table, Entity } from 'dynamodb-onetable';
+import { env } from 'process';
+import { Dynamo } from 'dynamodb-onetable/Dynamo';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+
+export const dynamoClient = new Dynamo({ client: new DynamoDBClient({}) })
+export const TABLE_NAME: string = env.TABLE!;
 
 export const Index_primary_Name = 'primary';
 export const Index_primary_HashKey = 'PK';
@@ -87,8 +92,8 @@ export const Schema = {
 };
 
 export const table = new Table({
-  client: dynamodb.dynamoClient,
-  name: dynamodb.TABLE_NAME,
+  client: dynamoClient,
+  name: TABLE_NAME,
   schema: Schema,
   isoDates: true,
   // logger: true,
