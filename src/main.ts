@@ -27,15 +27,13 @@ export class MyStack extends Stack {
     const workflow = new TodoLifecycleWorkflow(this, 'Workflow', {
       stateConfig: {
         stageName: 'dev',
-        reminderLambda: {
-          handler: api.getFunctionForOperation('addTodo'),
-        },
-        table: {
-          table: datastore.table,
-          writable: true,
-        },
+        reminderLambda: api.getFunctionForOperation('addTodo'),
+        table: datastore.table,
       },
     });
+
+    api.getFunctionForOperation('addTodo').grantInvoke(workflow);
+    datastore.table.grantReadWriteData(workflow);
 
     new CfnOutput(this, 'ApiId', { value: api.api.restApiId });
     new CfnOutput(this, 'Table', { value: datastore.table.tableName });

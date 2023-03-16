@@ -184,7 +184,7 @@ exports[`Snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 5,
       },
       "Type": "AWS::Lambda::Function",
@@ -851,7 +851,7 @@ exports[`Snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
         "Tags": [
           {
             "Key": "OpenAPI",
@@ -1022,7 +1022,7 @@ exports[`Snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
         "Tags": [
           {
             "Key": "OpenAPI",
@@ -1167,7 +1167,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "6fb3403e740e77d255d5962aa31c257f9399dc739542326a5533610973525cfa.zip",
+          "S3Key": "4436c64f66ccfb68d8ac8237355c216e1192154cb56eeffc4b9feff141fdbf25.zip",
         },
         "Description": "[dev] get /todos - return list of todos",
         "Environment": {
@@ -1189,7 +1189,7 @@ exports[`Snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
         "Tags": [
           {
             "Key": "OpenAPI",
@@ -1356,7 +1356,7 @@ exports[`Snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
         "Tags": [
           {
             "Key": "OpenAPI",
@@ -1501,59 +1501,12 @@ exports[`Snapshot 1`] = `
         "WorkflowRole98C7DC98",
       ],
       "Properties": {
-        "DefinitionString": "{
-  "Comment": "Manages the lifecycle of a ToDo",
-  "StartAt": "Wait 24h",
-  "States": {
-    "Wait 24h": {
-      "Type": "Wait",
-      "Next": "Load ToDo",
-      "TimestampPath": "$.reminderTimestamp"
-    },
-    "Load ToDo": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::dynamodb:getItem",
-      "Parameters": {
-        "TableName": "\${table#DynamoDBTable}",
-        "Key": {
-          "PK": {
-            "S.$": "States.Format('TODO#{}', $.id)"
+        "DefinitionS3Location": {
+          "Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "SK": {
-            "S.$": "States.Format('TODO#{}', $.id)"
-          }
-        }
-      },
-      "Next": "Send Reminder",
-      "ResultPath": "$.details"
-    },
-    "Send Reminder": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::lambda:invoke",
-      "Parameters": {
-        "FunctionName": "\${reminderLambda#LambdaFunction}",
-        "Payload": {
-          "id.$": "$.id",
-          "stageName": "\${stageName}"
-        }
-      },
-      "Retry": [
-        {
-          "ErrorEquals": [
-            "Lambda.ServiceException",
-            "Lambda.AWSLambdaException",
-            "Lambda.SdkClientException"
-          ],
-          "IntervalSeconds": 2,
-          "MaxAttempts": 6,
-          "BackoffRate": 2
-        }
-      ],
-      "ResultPath": "$.reminder",
-      "End": true
-    }
-  }
-}",
+          "Key": "c2b93e6304d63d104d229a6dcf32fa62ac26bf5a0ac50d91d46333de4a711fc3.json",
+        },
         "DefinitionSubstitutions": {
           "reminderLambda#LambdaFunction": {
             "Fn::GetAtt": [
@@ -1606,6 +1559,32 @@ exports[`Snapshot 1`] = `
         "PolicyDocument": {
           "Statement": [
             {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "RestApiFnaddTodoBD56C0AE",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "RestApiFnaddTodoBD56C0AE",
+                          "Arn",
+                        ],
+                      },
+                      ":*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            {
               "Action": [
                 "dynamodb:BatchGetItem",
                 "dynamodb:GetRecords",
@@ -1639,32 +1618,6 @@ exports[`Snapshot 1`] = `
                         ],
                       },
                       "/index/*",
-                    ],
-                  ],
-                },
-              ],
-            },
-            {
-              "Action": "lambda:InvokeFunction",
-              "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::GetAtt": [
-                    "RestApiFnaddTodoBD56C0AE",
-                    "Arn",
-                  ],
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      {
-                        "Fn::GetAtt": [
-                          "RestApiFnaddTodoBD56C0AE",
-                          "Arn",
-                        ],
-                      },
-                      ":*",
                     ],
                   ],
                 },

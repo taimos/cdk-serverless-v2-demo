@@ -2335,10 +2335,10 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
-"@taimos/cdk-serverless-v2@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@taimos/cdk-serverless-v2/-/cdk-serverless-v2-1.5.2.tgz#a718881268a8d48e4bf11fd6a0e881a2a1ad0068"
-  integrity sha512-ZGHturxfVOJYI4FqB5D3hb+d9R/9GFjWVhYwMDo1YJC6K4lI6bc3V9KQLVZOnpka0GsfWtpzQaZ0nZ4MR8remg==
+"@taimos/cdk-serverless-v2@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@taimos/cdk-serverless-v2/-/cdk-serverless-v2-1.6.0.tgz#6c39e515ae6a3171bc211eae9ff15a7f89cad6c1"
+  integrity sha512-O/EEU7bBvwJgsXRHUFW2OKQmWQW7IV3e9ErTspfOx/kWH9TmUdXXnksCrjSg4sVq1/7pqKSIHakPU2GQxmcY8w==
   dependencies:
     axios "^1.3.3"
     date-fns "^2.29.3"

@@ -50,7 +50,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.272.0",
     "@aws-sdk/lib-dynamodb": "^3.272.0",
-    "@taimos/cdk-serverless-v2": "^1.5.2",
+    "@taimos/cdk-serverless-v2": "^1.6.0",
     "aws-cdk-lib": "^2.60.0",
     "constructs": "^10.0.5",
     "date-fns": "^2.29.3",

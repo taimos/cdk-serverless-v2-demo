@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Model, Table, Entity } from 'dynamodb-onetable';
 import { env } from 'process';
 import { Dynamo } from 'dynamodb-onetable/Dynamo';

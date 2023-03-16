@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { AttributeType, ProjectionType } from 'aws-cdk-lib/aws-dynamodb';
 import { Construct } from 'constructs';
 import { SingleTableDatastore, SingleTableDatastoreProps } from '@taimos/cdk-serverless-v2/lib/constructs';
