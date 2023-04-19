@@ -829,7 +829,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "6bd4d7eb2679390f8613f64d22ac40ad964fa0b42201b9609295bf69959161a8.zip",
+          "S3Key": "a08086fcc118174b6381e10ed6107f549b4372b7899d0e0f8ab8ff3f901bad27.zip",
         },
         "Description": "[dev] post /todos - add new todo",
         "Environment": {
@@ -1000,7 +1000,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "9ebc6ecfba9763c50a344d5ab124603172465c21a335dd4f72e233b42f08201b.zip",
+          "S3Key": "e767866dfc59a05f4491647a92ac01dbd131c249d9599dced5ef1af613e50411.zip",
         },
         "Description": "[dev] get /todos/{id} - get a todo by its id",
         "Environment": {
@@ -1167,7 +1167,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "4436c64f66ccfb68d8ac8237355c216e1192154cb56eeffc4b9feff141fdbf25.zip",
+          "S3Key": "2c9fc81b03157ac579acb52cf68ea2782cb10dce0143c3a46dd5e2abb6c57a6b.zip",
         },
         "Description": "[dev] get /todos - return list of todos",
         "Environment": {
@@ -1334,7 +1334,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "cf15322c4b72df1b12f1c73b0e54a32f4c643d8d551371dd331660f541eba4f1.zip",
+          "S3Key": "df650a2ac2dac74c32831fdcbf1abdf042bd75a62a53b16df0af533303863908.zip",
         },
         "Description": "[dev] delete /todos/{id} - delete a todo",
         "Environment": {

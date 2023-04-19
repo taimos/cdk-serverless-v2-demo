@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Construct } from 'constructs';
-import { RestApi, RestApiProps } from '@taimos/cdk-serverless-v2/lib/constructs';
+import { RestApi, RestApiProps } from 'cdk-serverless/lib/constructs';
 import { operations, paths } from './rest.myapi-model.generated';
 
 export interface MyApiRestApiProps extends Omit<RestApiProps<operations>, 'definitionFileName' | 'apiName'> {

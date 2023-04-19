@@ -1,12 +1,13 @@
-import { Datastore, RestApi, ServerlessProject, Workflow } from '@taimos/cdk-serverless-v2/lib/projen';
+import { Datastore, RestApi, ServerlessProject, Workflow } from 'cdk-serverless/lib/projen';
 
 const project = new ServerlessProject({
   cdkVersion: '2.60.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-serverless-v2-demo',
+  gitpod: true,
   deps: [
     'projen',
-    '@taimos/cdk-serverless-v2',
+    'cdk-serverless',
     'date-fns',
   ],
 });

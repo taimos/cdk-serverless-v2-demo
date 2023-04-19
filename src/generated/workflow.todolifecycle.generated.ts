@@ -2,7 +2,7 @@
 import * as constructs from 'constructs';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
 import { IFunction } from 'aws-cdk-lib/aws-lambda';
-import * as sls from '@taimos/cdk-serverless-v2/lib/constructs';
+import * as sls from 'cdk-serverless/lib/constructs';
 
 export interface TodoLifecycleWorkflowProps extends Omit<sls.WorkflowProps, 'definitionFileName' | 'definitionSubstitutions'> {
   readonly stateConfig: {

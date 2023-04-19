@@ -2335,20 +2335,6 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
-"@taimos/cdk-serverless-v2@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@taimos/cdk-serverless-v2/-/cdk-serverless-v2-1.6.0.tgz#6c39e515ae6a3171bc211eae9ff15a7f89cad6c1"
-  integrity sha512-O/EEU7bBvwJgsXRHUFW2OKQmWQW7IV3e9ErTspfOx/kWH9TmUdXXnksCrjSg4sVq1/7pqKSIHakPU2GQxmcY8w==
-  dependencies:
-    axios "^1.3.3"
-    date-fns "^2.29.3"
-    js-yaml "^4.1.0"
-    jsonwebtoken "^9.0.0"
-    jwk-to-pem "^2.0.5"
-    lambda-log "^3.1.0"
-    projen "^0.67.58"
-    uuid "^9.0.0"
-
 "@tootallnate/once@2":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
@@ -2478,10 +2464,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.18.tgz#8dfb97f0da23c2293e554c5a50d61ef134d7697f"
   integrity sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==
 
-"@types/node@^14":
-  version "14.18.36"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.36.tgz#c414052cb9d43fab67d679d5f3c641be911f5835"
-  integrity sha512-FXKWbsJ6a1hIrRxv+FoukuHnGTgEzKYGi7kilfMae96AL9UNkPFNWJEEYWzdRI9ooIkbr4AKldyuSTLql06vLQ==
+"@types/node@^16":
+  version "16.18.23"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.23.tgz#b6e934fe427eb7081d0015aad070acb3373c3c90"
+  integrity sha512-XAMpaw1s1+6zM+jn2tmw8MyaRDIJfXxqmIQIS0HfoGYPuf7dUWeiUKopwq13KFX9lEp1+THGtlaaYx39Nxr58g==
 
 "@types/prettier@^2.1.5":
   version "2.7.2"
@@ -2824,10 +2810,10 @@ aws-cdk@^2.60.0:
   optionalDependencies:
     fsevents "2.3.2"
 
-axios@^1.3.3:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.3.tgz#e7011384ba839b885007c9c9fae1ff23dceb295b"
-  integrity sha512-eYq77dYIFS77AQlhzEL937yUBSepBfPIe8FcgEDN35vMNZKMrs81pgnyrQpwfy4NF4b4XWX1Zgx7yX+25w8QJA==
+axios@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.5.tgz#e07209b39a0d11848e3e341fa087acd71dadc542"
+  integrity sha512-glL/PvG/E+xCWwV8S6nCHcrfg1exGx7vxyUIivIA1iL7BIh6bePylCfVHwp6k13ao7SATxB6imau2kqY+I67kw==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -3095,6 +3081,20 @@ case@1.6.3, case@^1.6.3:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/case/-/case-1.6.3.tgz#0a4386e3e9825351ca2e6216c60467ff5f1ea1c9"
   integrity sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==
+
+cdk-serverless@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/cdk-serverless/-/cdk-serverless-2.0.1.tgz#1f641e605583e416e0c71cb51546cfa79eb15dcc"
+  integrity sha512-TaacltslUpCMfIMvEC7ovLHbrR/fXdK+tJjeCgNc2OOMmIcne/ll4JtfXwp85yG6a8FNQElAaPSX+zjOgLcAcg==
+  dependencies:
+    axios "^1.3.5"
+    date-fns "^2.29.3"
+    js-yaml "^4.1.0"
+    jsonwebtoken "^9.0.0"
+    jwk-to-pem "^2.0.5"
+    lambda-log "^3.1.0"
+    projen "^0.71.16"
+    uuid "^9.0.0"
 
 chalk@^2.0.0:
   version "2.4.2"
@@ -4863,10 +4863,10 @@ jest-haste-map@^29.3.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
-jest-junit@^13:
-  version "13.2.0"
-  resolved "https://registry.yarnpkg.com/jest-junit/-/jest-junit-13.2.0.tgz#66eeb86429aafac8c1745a70f44ace185aacb943"
-  integrity sha512-B0XNlotl1rdsvFZkFfoa19mc634+rrd8E4Sskb92Bb8MmSXeWV9XJGUyctunZS1W410uAxcyYuPUGVnbcOH8cg==
+jest-junit@^15:
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/jest-junit/-/jest-junit-15.0.0.tgz#a47544ab42e9f8fe7ada56306c218e09e52bd690"
+  integrity sha512-Z5sVX0Ag3HZdMUnD5DFlG+1gciIFSy7yIVPhOdGUi8YJaI9iLvvBb530gtQL2CHmv0JJeiwRZenr0VrSR7frvg==
   dependencies:
     mkdirp "^1.0.4"
     strip-ansi "^6.0.1"
@@ -6036,10 +6036,10 @@ projen@^0.66.9:
     yargs "^16.2.0"
     zlib "^1.0.5"
 
-projen@^0.67.58:
-  version "0.67.58"
-  resolved "https://registry.yarnpkg.com/projen/-/projen-0.67.58.tgz#1cd76a385825f8b0e3fdeab5f499c154fa77b8ce"
-  integrity sha512-Y7+pd7wv/G/Wn2rS0IJbVZTmUqIegvmUDF8HNoIWIx9Xem1+KBXLaYePdbmH31ovjNDLIFr5MyvVp27FHSVDoA==
+projen@^0.71.16:
+  version "0.71.16"
+  resolved "https://registry.yarnpkg.com/projen/-/projen-0.71.16.tgz#7726ea628a18e243a82d28fb2232c622a6a55330"
+  integrity sha512-/yJB6zYPlMmh8RyadrpuOGuuern5MXn7VAaprLuqRChaEEYhQ8eKbvaY2ZUzzrsfFA47oM9PgKBTFkp/rvs82w==
   dependencies:
     "@iarna/toml" "^2.2.5"
     case "^1.6.3"
@@ -6047,15 +6047,13 @@ projen@^0.67.58:
     comment-json "4.2.2"
     conventional-changelog-config-spec "^2.1.0"
     fast-json-patch "^3.1.1"
-    fs-extra "^9.1.0"
     glob "^8"
     ini "^2.0.0"
-    semver "^7.3.8"
+    semver "^7.5.0"
     shx "^0.3.4"
     xmlbuilder2 "^2.4.1"
     yaml "2.0.0"
     yargs "^16.2.0"
-    zlib "^1.0.5"
 
 promise-inflight@^1.0.1:
   version "1.0.1"
@@ -6339,6 +6337,13 @@ semver@^6.0.0, semver@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
+
+semver@^7.5.0:
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.0.tgz#ed8c5dc8efb6c629c88b23d41dc9bf40c1d96cd0"
+  integrity sha512-+XC0AD/R7Q2mPSRuy2Id0+CGTZ98+8f+KvwirxOKIEyid+XSx6HbC63p+O4IndTHuX5Z+JxQ0TghCkO5Cg/2HA==
+  dependencies:
+    lru-cache "^6.0.0"
 
 set-blocking@^2.0.0:
   version "2.0.0"

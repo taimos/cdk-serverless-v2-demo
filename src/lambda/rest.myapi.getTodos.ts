@@ -1,4 +1,4 @@
-import { api } from '@taimos/cdk-serverless-v2/lib/lambda';
+import { api } from 'cdk-serverless/lib/lambda';
 import { Todo, Index_GSI1_Name } from '../generated/datastore.mymodel-model.generated';
 import { operations } from '../generated/rest.myapi-model.generated';
 

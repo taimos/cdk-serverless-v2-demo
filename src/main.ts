@@ -1,5 +1,5 @@
-import { Authentication } from '@taimos/cdk-serverless-v2/lib/constructs/authentication';
 import { App, CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
+import { CognitoAuthentication } from 'cdk-serverless/lib/constructs/authentication';
 import { Construct } from 'constructs';
 import { MyModelDatastore } from './generated/datastore.mymodel-construct.generated';
 import { MyApiRestApi } from './generated/rest.myapi-api.generated';
@@ -11,7 +11,7 @@ export class MyStack extends Stack {
 
     const datastore = new MyModelDatastore(this, 'Datastore');
 
-    const authentication = new Authentication(this, 'Auth', {
+    const authentication = new CognitoAuthentication(this, 'Auth', {
       userPoolName: 'myPool',
       triggers: {
         preTokenGeneration: true,

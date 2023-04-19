@@ -1,4 +1,4 @@
-import { api, errors } from '@taimos/cdk-serverless-v2/lib/lambda';
+import { api, errors } from 'cdk-serverless/lib/lambda';
 import { operations } from '../generated/rest.myapi-model.generated';
 
 export const handler = api.createOpenApiHandler<operations['removeTodo']>(async (ctx) => {
