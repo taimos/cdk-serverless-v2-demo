@@ -15,6 +15,10 @@
     ".projen/tasks.json",
     "cdk.json",
     "LICENSE",
+    "src/generated/datastore.mymodel-construct.generated.ts",
+    "src/generated/datastore.mymodel-model.generated.ts",
+    "src/generated/rest.myapi-api.generated.ts",
+    "src/generated/workflow.todolifecycle.generated.ts",
     "tsconfig.dev.json",
     "tsconfig.json"
   ],

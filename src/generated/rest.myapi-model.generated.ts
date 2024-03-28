@@ -43,24 +43,26 @@ export interface components {
   pathItems: never;
 }
 
+export type $defs = Record<string, never>;
+
 export type external = Record<string, never>;
 
 export interface operations {
 
+  /** return list of todos */
   getTodos: {
-    /** return list of todos */
     responses: {
       /** @description successful operation */
       200: {
         content: {
-          "application/json": (components["schemas"]["Todo"])[];
+          "application/json": components["schemas"]["Todo"][];
           "text/calendar": string;
         };
       };
     };
   };
+  /** add new todo */
   addTodo: {
-    /** add new todo */
     requestBody: {
       content: {
         "application/json": components["schemas"]["AddTodo"];
@@ -85,8 +87,8 @@ export interface operations {
       };
     };
   };
+  /** get a todo by its id */
   getTodoById: {
-    /** get a todo by its id */
     parameters: {
       path: {
         id: string;
@@ -101,8 +103,8 @@ export interface operations {
       };
     };
   };
+  /** delete a todo */
   removeTodo: {
-    /** delete a todo */
     parameters: {
       path: {
         id: string;
