@@ -18,6 +18,10 @@
 /cdk.json linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
+/src/generated/datastore.mymodel-construct.generated.ts linguist-generated
+/src/generated/datastore.mymodel-model.generated.ts linguist-generated
+/src/generated/rest.myapi-api.generated.ts linguist-generated
+/src/generated/workflow.todolifecycle.generated.ts linguist-generated
 /tsconfig.dev.json linguist-generated
 /tsconfig.json linguist-generated
 /yarn.lock linguist-generated
