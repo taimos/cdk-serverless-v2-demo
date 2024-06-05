@@ -229,7 +229,7 @@
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @types/aws-lambda @types/jest @types/js-yaml @types/lambda-log @types/node @types/uuid @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-sdk/client-dynamodb @aws-sdk/lib-dynamodb aws-cdk-lib cdk-serverless constructs date-fns dynamodb-onetable js-yaml openapi-typescript uuid"
+          "exec": "yarn upgrade @types/aws-lambda @types/jest @types/js-yaml @types/lambda-log @types/node @types/uuid @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-cdk/aws-cognito-identitypool-alpha @aws-sdk/client-dynamodb @aws-sdk/lib-dynamodb aws-cdk-lib cdk-serverless constructs date-fns dynamodb-onetable js-yaml openapi-typescript uuid"
         },
         {
           "exec": "npx projen"

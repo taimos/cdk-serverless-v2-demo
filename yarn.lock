@@ -25,6 +25,11 @@
   resolved "https://registry.yarnpkg.com/@aws-cdk/asset-node-proxy-agent-v6/-/asset-node-proxy-agent-v6-2.0.3.tgz#9b5d213b5ce5ad4461f6a4720195ff8de72e6523"
   integrity sha512-twhuEG+JPOYCYPx/xy5uH2+VUsIEhPTzDY0F1KuB+ocjWWB/KEDiOVL19nHvbPCB6fhWnkykXEMJ4HHcKvjtvg==
 
+"@aws-cdk/aws-cognito-identitypool-alpha@2.140.0-alpha.0":
+  version "2.140.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cognito-identitypool-alpha/-/aws-cognito-identitypool-alpha-2.140.0-alpha.0.tgz#d74b3e5de0377e57273c69ee42afdc70c7276f94"
+  integrity sha512-s6fxmmGhD7ut+k5i8V0mjxVZY46jlkJYlJbcn+cTKyi+Ux2kcAbkSgnmj4926HgUITPCX+LaShcvT8/EdvA1Zw==
+
 "@aws-crypto/ie11-detection@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@aws-crypto/ie11-detection/-/ie11-detection-3.0.0.tgz#640ae66b4ec3395cee6a8e94ebcd9f80c24cd688"
@@ -2988,10 +2993,10 @@ case@1.6.3, case@^1.6.3:
   resolved "https://registry.yarnpkg.com/case/-/case-1.6.3.tgz#0a4386e3e9825351ca2e6216c60467ff5f1ea1c9"
   integrity sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==
 
-cdk-serverless@^2.11.24:
-  version "2.11.24"
-  resolved "https://registry.yarnpkg.com/cdk-serverless/-/cdk-serverless-2.11.24.tgz#3f9ce33309a726b191280f5a13f0970cf005c7d6"
-  integrity sha512-p5ouHSSF1xeZgQrB8Q2YB2Rg+G3cJl9D4CN5nxZiZXtKbgBtfygh6hRr47BexbKmM3FMneGsd7+7fSBTfadLEg==
+cdk-serverless@^2.11.26:
+  version "2.11.26"
+  resolved "https://registry.yarnpkg.com/cdk-serverless/-/cdk-serverless-2.11.26.tgz#a734a31e455f9e5b4e3a4069a4bffbf3bfa35b3c"
+  integrity sha512-AEN7iS8JMgVJTwaQZX9bWdjWyV8D7Z7k5ZRqYm+WiebBpyquanLdT6JHeYW42W6bbwvaPovAutMi/tN8rGdTgQ==
   dependencies:
     axios "^1.7.2"
     constructs "^10.3.0"

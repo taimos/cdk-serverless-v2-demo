@@ -22,6 +22,7 @@ export class MyStack extends Stack {
       stageName: 'dev',
       singleTableDatastore: datastore,
       authentication,
+      cors: true,
     });
 
     const workflow = new TodoLifecycleWorkflow(this, 'Workflow', {
