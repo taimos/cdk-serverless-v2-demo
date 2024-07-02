@@ -34,6 +34,9 @@ exports[`Snapshot 1`] = `
       "ap-southeast-3": {
         "states": "states.ap-southeast-3.amazonaws.com",
       },
+      "ap-southeast-4": {
+        "states": "states.ap-southeast-4.amazonaws.com",
+      },
       "ca-central-1": {
         "states": "states.ca-central-1.amazonaws.com",
       },
@@ -45,6 +48,9 @@ exports[`Snapshot 1`] = `
       },
       "eu-central-1": {
         "states": "states.eu-central-1.amazonaws.com",
+      },
+      "eu-central-2": {
+        "states": "states.eu-central-2.amazonaws.com",
       },
       "eu-north-1": {
         "states": "states.eu-north-1.amazonaws.com",
@@ -63,6 +69,9 @@ exports[`Snapshot 1`] = `
       },
       "eu-west-3": {
         "states": "states.eu-west-3.amazonaws.com",
+      },
+      "il-central-1": {
+        "states": "states.il-central-1.amazonaws.com",
       },
       "me-central-1": {
         "states": "states.me-central-1.amazonaws.com",
@@ -171,11 +180,6 @@ exports[`Snapshot 1`] = `
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
           "S3Key": "964b16616d1de437fcf32268fc89e4256b1e661c647fd3c0b222cd4d94e14657.zip",
-        },
-        "Environment": {
-          "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-          },
         },
         "Handler": "index.handler",
         "Role": {
@@ -442,7 +446,7 @@ exports[`Snapshot 1`] = `
       "Type": "AWS::IAM::Role",
       "UpdateReplacePolicy": "Retain",
     },
-    "RestApiDeploymentEFEC237022b2de8e33d883c3ad472444d938e8cc": {
+    "RestApiDeploymentEFEC237023523924dbcca57f04bf7287a6ccab6d": {
       "Properties": {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": {
@@ -457,7 +461,7 @@ exports[`Snapshot 1`] = `
       ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "RestApiDeploymentEFEC237022b2de8e33d883c3ad472444d938e8cc",
+          "Ref": "RestApiDeploymentEFEC237023523924dbcca57f04bf7287a6ccab6d",
         },
         "RestApiId": {
           "Ref": "RestApiFA9A4412",
@@ -805,6 +809,67 @@ exports[`Snapshot 1`] = `
                 },
               },
             },
+            "/{proxy+}": {
+              "options": {
+                "description": "Enable CORS by returning correct headers",
+                "responses": {
+                  "200": {
+                    "content": {},
+                    "description": "Default response for CORS method",
+                    "headers": {
+                      "Access-Control-Allow-Credentials": {
+                        "schema": {
+                          "type": "string",
+                        },
+                      },
+                      "Access-Control-Allow-Headers": {
+                        "schema": {
+                          "type": "string",
+                        },
+                      },
+                      "Access-Control-Allow-Methods": {
+                        "schema": {
+                          "type": "string",
+                        },
+                      },
+                      "Access-Control-Allow-Origin": {
+                        "schema": {
+                          "type": "string",
+                        },
+                      },
+                    },
+                  },
+                },
+                "summary": "CORS support",
+                "tags": [
+                  "CORS",
+                ],
+                "x-amazon-apigateway-integration": {
+                  "requestTemplates": {
+                    "application/json": "#set($context.requestOverride.header.origin = $method.request.header.origin)
+{
+  "statusCode" : 200
+}
+",
+                  },
+                  "responses": {
+                    "default": {
+                      "responseParameters": {
+                        "method.response.header.Access-Control-Allow-Credentials": "'true'",
+                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                        "method.response.header.Access-Control-Allow-Methods": "'PUT,GET,POST,DELETE,PATCH,HEAD,OPTIONS'",
+                        "method.response.header.Access-Control-Allow-Origin": "context.requestOverride.header.origin",
+                      },
+                      "responseTemplates": {
+                        "application/json": "{}",
+                      },
+                      "statusCode": "200",
+                    },
+                  },
+                  "type": "mock",
+                },
+              },
+            },
           },
           "tags": [
             {
@@ -829,12 +894,11 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "a08086fcc118174b6381e10ed6107f549b4372b7899d0e0f8ab8ff3f901bad27.zip",
+          "S3Key": "3453127a34e7b5cace2e0c2a7a4015ac832169693fc6eb7df4faa2cb22d1b7c2.zip",
         },
         "Description": "[dev] post /todos - add new todo",
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
@@ -1000,12 +1064,11 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "e767866dfc59a05f4491647a92ac01dbd131c249d9599dced5ef1af613e50411.zip",
+          "S3Key": "a351ac285c15c6af18fcc39869f5e9a2f72662453bfb7b7851e644850b6769fe.zip",
         },
         "Description": "[dev] get /todos/{id} - get a todo by its id",
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
@@ -1167,12 +1230,11 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "2c9fc81b03157ac579acb52cf68ea2782cb10dce0143c3a46dd5e2abb6c57a6b.zip",
+          "S3Key": "484fb0024447e8469a53e7d1468fdf370a48fc2ec9eedfd7c7e959ee05a6cf55.zip",
         },
         "Description": "[dev] get /todos - return list of todos",
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
@@ -1334,12 +1396,11 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "df650a2ac2dac74c32831fdcbf1abdf042bd75a62a53b16df0af533303863908.zip",
+          "S3Key": "d58d9807e5f7251148ef53699af379efe23542131dc75475ba9abd7df085f596.zip",
         },
         "Description": "[dev] delete /todos/{id} - delete a todo",
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
