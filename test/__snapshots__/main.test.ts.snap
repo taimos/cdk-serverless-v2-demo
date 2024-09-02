@@ -2,115 +2,15 @@
 
 exports[`Snapshot 1`] = `
 {
-  "Mappings": {
-    "ServiceprincipalMap": {
-      "af-south-1": {
-        "states": "states.af-south-1.amazonaws.com",
-      },
-      "ap-east-1": {
-        "states": "states.ap-east-1.amazonaws.com",
-      },
-      "ap-northeast-1": {
-        "states": "states.ap-northeast-1.amazonaws.com",
-      },
-      "ap-northeast-2": {
-        "states": "states.ap-northeast-2.amazonaws.com",
-      },
-      "ap-northeast-3": {
-        "states": "states.ap-northeast-3.amazonaws.com",
-      },
-      "ap-south-1": {
-        "states": "states.ap-south-1.amazonaws.com",
-      },
-      "ap-south-2": {
-        "states": "states.ap-south-2.amazonaws.com",
-      },
-      "ap-southeast-1": {
-        "states": "states.ap-southeast-1.amazonaws.com",
-      },
-      "ap-southeast-2": {
-        "states": "states.ap-southeast-2.amazonaws.com",
-      },
-      "ap-southeast-3": {
-        "states": "states.ap-southeast-3.amazonaws.com",
-      },
-      "ca-central-1": {
-        "states": "states.ca-central-1.amazonaws.com",
-      },
-      "cn-north-1": {
-        "states": "states.cn-north-1.amazonaws.com",
-      },
-      "cn-northwest-1": {
-        "states": "states.cn-northwest-1.amazonaws.com",
-      },
-      "eu-central-1": {
-        "states": "states.eu-central-1.amazonaws.com",
-      },
-      "eu-north-1": {
-        "states": "states.eu-north-1.amazonaws.com",
-      },
-      "eu-south-1": {
-        "states": "states.eu-south-1.amazonaws.com",
-      },
-      "eu-south-2": {
-        "states": "states.eu-south-2.amazonaws.com",
-      },
-      "eu-west-1": {
-        "states": "states.eu-west-1.amazonaws.com",
-      },
-      "eu-west-2": {
-        "states": "states.eu-west-2.amazonaws.com",
-      },
-      "eu-west-3": {
-        "states": "states.eu-west-3.amazonaws.com",
-      },
-      "me-central-1": {
-        "states": "states.me-central-1.amazonaws.com",
-      },
-      "me-south-1": {
-        "states": "states.me-south-1.amazonaws.com",
-      },
-      "sa-east-1": {
-        "states": "states.sa-east-1.amazonaws.com",
-      },
-      "us-east-1": {
-        "states": "states.us-east-1.amazonaws.com",
-      },
-      "us-east-2": {
-        "states": "states.us-east-2.amazonaws.com",
-      },
-      "us-gov-east-1": {
-        "states": "states.us-gov-east-1.amazonaws.com",
-      },
-      "us-gov-west-1": {
-        "states": "states.us-gov-west-1.amazonaws.com",
-      },
-      "us-iso-east-1": {
-        "states": "states.amazonaws.com",
-      },
-      "us-iso-west-1": {
-        "states": "states.amazonaws.com",
-      },
-      "us-isob-east-1": {
-        "states": "states.amazonaws.com",
-      },
-      "us-west-1": {
-        "states": "states.us-west-1.amazonaws.com",
-      },
-      "us-west-2": {
-        "states": "states.us-west-2.amazonaws.com",
-      },
-    },
-  },
   "Outputs": {
     "ApiId": {
       "Value": {
         "Ref": "RestApiFA9A4412",
       },
     },
-    "AuthUserPoolIdC0605E59": {
+    "MyModelTableName": {
       "Value": {
-        "Ref": "AuthUserPool8115E87F",
+        "Ref": "DatastoreBBD23A29",
       },
     },
     "RestApiEndpoint575871DF": {
@@ -152,6 +52,11 @@ exports[`Snapshot 1`] = `
         "Ref": "DatastoreBBD23A29",
       },
     },
+    "UserPoolId": {
+      "Value": {
+        "Ref": "AuthUserPool8115E87F",
+      },
+    },
   },
   "Parameters": {
     "BootstrapVersion": {
@@ -171,11 +76,6 @@ exports[`Snapshot 1`] = `
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
           "S3Key": "964b16616d1de437fcf32268fc89e4256b1e661c647fd3c0b222cd4d94e14657.zip",
-        },
-        "Environment": {
-          "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-          },
         },
         "Handler": "index.handler",
         "Role": {
@@ -442,7 +342,7 @@ exports[`Snapshot 1`] = `
       "Type": "AWS::IAM::Role",
       "UpdateReplacePolicy": "Retain",
     },
-    "RestApiDeploymentEFEC237022b2de8e33d883c3ad472444d938e8cc": {
+    "RestApiDeploymentEFEC237023523924dbcca57f04bf7287a6ccab6d": {
       "Properties": {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": {
@@ -457,7 +357,7 @@ exports[`Snapshot 1`] = `
       ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "RestApiDeploymentEFEC237022b2de8e33d883c3ad472444d938e8cc",
+          "Ref": "RestApiDeploymentEFEC237023523924dbcca57f04bf7287a6ccab6d",
         },
         "RestApiId": {
           "Ref": "RestApiFA9A4412",
@@ -805,6 +705,67 @@ exports[`Snapshot 1`] = `
                 },
               },
             },
+            "/{proxy+}": {
+              "options": {
+                "description": "Enable CORS by returning correct headers",
+                "responses": {
+                  "200": {
+                    "content": {},
+                    "description": "Default response for CORS method",
+                    "headers": {
+                      "Access-Control-Allow-Credentials": {
+                        "schema": {
+                          "type": "string",
+                        },
+                      },
+                      "Access-Control-Allow-Headers": {
+                        "schema": {
+                          "type": "string",
+                        },
+                      },
+                      "Access-Control-Allow-Methods": {
+                        "schema": {
+                          "type": "string",
+                        },
+                      },
+                      "Access-Control-Allow-Origin": {
+                        "schema": {
+                          "type": "string",
+                        },
+                      },
+                    },
+                  },
+                },
+                "summary": "CORS support",
+                "tags": [
+                  "CORS",
+                ],
+                "x-amazon-apigateway-integration": {
+                  "requestTemplates": {
+                    "application/json": "#set($context.requestOverride.header.origin = $method.request.header.origin)
+{
+  "statusCode" : 200
+}
+",
+                  },
+                  "responses": {
+                    "default": {
+                      "responseParameters": {
+                        "method.response.header.Access-Control-Allow-Credentials": "'true'",
+                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                        "method.response.header.Access-Control-Allow-Methods": "'PUT,GET,POST,DELETE,PATCH,HEAD,OPTIONS'",
+                        "method.response.header.Access-Control-Allow-Origin": "context.requestOverride.header.origin",
+                      },
+                      "responseTemplates": {
+                        "application/json": "{}",
+                      },
+                      "statusCode": "200",
+                    },
+                  },
+                  "type": "mock",
+                },
+              },
+            },
           },
           "tags": [
             {
@@ -829,12 +790,11 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "a08086fcc118174b6381e10ed6107f549b4372b7899d0e0f8ab8ff3f901bad27.zip",
+          "S3Key": "96e42ab815797e7a84821f453b4e1708743cfef27fb0e31fc704c4be939a1b3d.zip",
         },
         "Description": "[dev] post /todos - add new todo",
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
@@ -1000,12 +960,11 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "e767866dfc59a05f4491647a92ac01dbd131c249d9599dced5ef1af613e50411.zip",
+          "S3Key": "9ddb6b76a7eda680f971b378cd2fbd7ed64dc1184f7222907f31a548ef69a46f.zip",
         },
         "Description": "[dev] get /todos/{id} - get a todo by its id",
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
@@ -1167,12 +1126,11 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "2c9fc81b03157ac579acb52cf68ea2782cb10dce0143c3a46dd5e2abb6c57a6b.zip",
+          "S3Key": "6aa52c999b339d18728f0584da4762ea01f7eaeace73a295a205847742cd17a8.zip",
         },
         "Description": "[dev] get /todos - return list of todos",
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
@@ -1334,12 +1292,11 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "df650a2ac2dac74c32831fdcbf1abdf042bd75a62a53b16df0af533303863908.zip",
+          "S3Key": "89331aaf954f5419b7d3290ea71f85b2850ee38202606b7a5003adcd6e2b8c41.zip",
         },
         "Description": "[dev] delete /todos/{id} - delete a todo",
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "STAGE": "dev",
             "TABLE": {
               "Ref": "DatastoreBBD23A29",
@@ -1537,15 +1494,7 @@ exports[`Snapshot 1`] = `
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
               "Principal": {
-                "Service": {
-                  "Fn::FindInMap": [
-                    "ServiceprincipalMap",
-                    {
-                      "Ref": "AWS::Region",
-                    },
-                    "states",
-                  ],
-                },
+                "Service": "states.amazonaws.com",
               },
             },
           ],
