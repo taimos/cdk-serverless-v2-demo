@@ -6,7 +6,7 @@ import { Dynamo } from 'dynamodb-onetable/Dynamo';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 
 export const dynamoClient = new Dynamo({ client: new DynamoDBClient({}) })
-export const TABLE_NAME: string = env.TABLE!;
+export const TABLE_NAME: string = env.TABLE ?? 'dummy-table';
 
 export const Index_primary_Name = 'primary';
 export const Index_primary_HashKey = 'PK';
